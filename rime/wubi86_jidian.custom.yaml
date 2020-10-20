@@ -1,0 +1,39 @@
+﻿patch:
+  switches:
+    - name: ascii_mode
+      reset: 1
+
+  menu:
+    page_size: 9
+
+  key_binder:
+    bindings:
+      - {accept: Up, send: Left, when: composing}
+      - {accept: Down, send: Right, when: composing}
+      - {accept: comma, send: Page_Up, when: composing}
+      - {accept: period, send: Page_Down, when: composing}
+      #- { when: composing, accept: Return, send: Escape }
+      - { when: has_menu, accept: semicolon, send: 2 }
+      - { when: has_menu, accept: apostrophe, send: 3 }
+
+  translator/enable_user_dict: true # 关闭词频调整
+  translator/enable_sentence: false # 关闭句子输入
+  translator/enable_user_dict: true # 是否开启用户词典（用户词典记录动态字词频，用户词）
+  translator/enable_encoder: true # 自动造词
+  #speller/max_code_length: 4 # 最长4码
+  speller/auto_select: false # 顶字上屏
+  speller/auto_select_unique_candidate: false # 无重码自动上屏
+
+  # 自定义短语
+  engine/translators:
+      - punct_translator
+      - reverse_lookup_translator
+      - table_translator@custom_phrase
+      - table_translator
+  custom_phrase: 
+      dictionary: ""
+      user_dict: custom_phrase
+      db_class: stabledb
+      enable_completion: false
+      enable_sentence: false
+      initial_quality: 1
