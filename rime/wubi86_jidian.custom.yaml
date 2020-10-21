@@ -15,6 +15,12 @@
       #- { when: composing, accept: Return, send: Escape }
       - { when: has_menu, accept: semicolon, send: 2 }
       - { when: has_menu, accept: apostrophe, send: 3 }
+      # 单单设置 Shift_R 是没用的，需要配合 Shift。但是按键的时候只需要按一次右 Shift
+      # {accept: "Shift+Shift_R", select: .next, when: always}  #切换输入法
+      # 为了覆盖原来的左右 Shift 功能，需要：
+      # "ascii_composer/switch_key/Shift_L": commit_code
+      # "ascii_composer/switch_key/Shift_R": noop
+      - { when: composing, accept: "Control+bracketleft", send: Escape }
 
   translator/enable_user_dict: true # 关闭词频调整
   translator/enable_sentence: false # 关闭句子输入
@@ -37,3 +43,7 @@
       enable_completion: false
       enable_sentence: false
       initial_quality: 1
+
+  punctuator/import_preset: symbols
+  recognizer/patterns/punct: "^/([a-z]+|[0-9])$"
+
