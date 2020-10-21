@@ -36,6 +36,7 @@
       - reverse_lookup_translator
       - table_translator@custom_phrase
       - table_translator
+      - lua_translator@date_translator # 自定义系统变量输出
   custom_phrase: 
       dictionary: ""
       user_dict: custom_phrase
